@@ -43,3 +43,5 @@ const analyticsSchema = new mongoose.Schema({
     },
   ],
 });
+
+export default mongoose.model("Analytics", analyticsSchema);
