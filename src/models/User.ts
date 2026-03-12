@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
+    isVerified: { type: Boolean, required: true, default: false },
     passwordHash: { type: String, required: true },
     timezone: { type: String, required: true },
     locale: { type: String, required: true },

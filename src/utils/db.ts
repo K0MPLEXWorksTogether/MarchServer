@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 import AppLogger from "./logger";
-import { ConnectionError } from "../types/errors";
+import { EnvironmentError } from "../types/errors";
 
 export default async function connectDB() {
   const logger = AppLogger.getLogger();
   try {
     const connectionUrl = process.env.MONGODB_URL;
     if (!connectionUrl) {
-      throw new ConnectionError(
+      throw new EnvironmentError(
         "Empty connection string for MongoDB connection"
       );
     }
@@ -18,9 +18,9 @@ export default async function connectDB() {
       `[connection] MongoDB connected successfully: ${connection.connection.host}`
     );
   } catch (err: unknown) {
-    if (err instanceof ConnectionError) {
+    if (err instanceof EnvironmentError) {
       logger.error(
-        "[connection] MongoDB connection failed: empty connection string"
+        "[connection] MongoDB connection failed: empty connection string in enviroment"
       );
     } else if (err instanceof Error) {
       logger.error(`[connection] MongoDB connection failed: ${err.message}`);
