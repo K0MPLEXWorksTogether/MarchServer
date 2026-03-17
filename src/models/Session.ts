@@ -40,10 +40,34 @@ const sessionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  date: {
-    type: String,
+  focusTime: {
+    type: Number,
     required: true,
-    index: true,
+  },
+  eventTimeline: {
+    type: [
+      {
+        event: {
+          type: String,
+          enum: ["pause", "focus"],
+          required: true,
+        },
+        time: {
+          type: Date,
+          required: true,
+        },
+      },
+    ],
+    default: null,
+  },
+  score: {
+    type: Number,
+    enum: [1, 2, 3, 4, 5],
+    required: true,
+  },
+  feeling: {
+    type: String,
+    default: ""
   },
 });
 

@@ -30,7 +30,8 @@ const analyticsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Task",
       },
-      timeSpent: Number,
+      timeSpent: { type: Number, required: true },
+      efficiency: { type: Number, required: true },
     },
   ],
   goalDistribution: [
@@ -42,6 +43,9 @@ const analyticsSchema = new mongoose.Schema({
       timeSpent: Number,
     },
   ],
+  longestSession: { type: Number, required: true, default: 0 },
+  averageSessionLength: { type: Number, required: true, default: 0 },
+  averagePauseTime: { type: Number, required: true, default: 0 },
 });
 
 export default mongoose.model("Analytics", analyticsSchema);

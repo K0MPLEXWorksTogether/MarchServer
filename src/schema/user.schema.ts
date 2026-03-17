@@ -11,6 +11,13 @@ export const userDTO = z.object({
   updatedAt: z.date(),
 });
 
+export const userAuthRecord = z.object({
+  userId: z.string(),
+  email: z.email(),
+  passwordHash: z.string(),
+  isVerified: z.boolean(),
+});
+
 export const createUserPayload = z.object({
   username: z.string().min(8).max(64),
   email: z.email(),
@@ -26,5 +33,6 @@ export const updateUserPayload = createUserPayload.omit({
 });
 
 export type UserDTO = z.infer<typeof userDTO>;
+export type UserAuthRecord = z.infer<typeof userAuthRecord>;
 export type CreateUserPayload = z.infer<typeof createUserPayload>;
 export type UpdateUserPayload = z.infer<typeof updateUserPayload>;

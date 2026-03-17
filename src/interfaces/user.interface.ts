@@ -2,6 +2,7 @@ import type {
   CreateUserPayload,
   UpdateUserPayload,
   UserDTO,
+  UserAuthRecord,
 } from "../schema/user.schema";
 
 export default interface IUserInterface {
@@ -11,4 +12,7 @@ export default interface IUserInterface {
   getUsers(page: number, limit: number): Promise<UserDTO[]>;
   deleteUserById(id: string): Promise<UserDTO>;
   getUserByEmail(email: string): Promise<UserDTO | null>;
+  getUserAuthByEmail(email: string): Promise<UserAuthRecord | null>;
+  getUserAuthById(id: string): Promise<UserAuthRecord | null>;
+  verifyUserById(id: string): Promise<UserDTO>;
 }

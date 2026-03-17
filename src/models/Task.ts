@@ -11,16 +11,16 @@ const taskSchema = new mongoose.Schema(
       index: true,
     },
     spentTime: { type: Number, required: true, default: 0 },
+    description: { type: String, required: true, default: "" },
     status: {
       type: String,
-      enum: ["active", "done", "pending"],
-      default: "pending",
+      enum: ["todo", "doing", "done", "not doing"],
+      default: "todo",
       required: true,
     },
     priority: {
       type: Number,
-      required: true,
-      default: 0,
+      default: -1,
     },
   },
   { timestamps: true }

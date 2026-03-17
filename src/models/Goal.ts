@@ -10,7 +10,7 @@ const goalSchema = new mongoose.Schema(
       index: true,
     },
     allocatedTime: { type: Number, required: true },
-    description: { type: String, required: true, default: "" },
+    description: { type: String, default: "" },
     remainingTime: {
       type: Number,
       required: true,
@@ -18,10 +18,22 @@ const goalSchema = new mongoose.Schema(
         return this.allocatedTime;
       },
     },
-    timeRemainingForTasks: { type: Number, required: true, default: 0 },
-    status: {type: String, enum: ["completed", "active", "pending"]}
+    label: { type: String, default: "" },
+    timeRemainingForTasks: {
+      type: Number,
+      required: true,
+      default: function () {
+        return this.allocatedTime;
+      },
+    },
+    status: {
+      type: String,
+      enum: ["todo", "doing", "done", "not doing"],
+      default: "todo",
+    },
   },
   { timestamps: true }
 );
 
+goalSchema.index({ user: 1, goalName: 1 }, { unique: true });
 export default mongoose.model("Goal", goalSchema);
